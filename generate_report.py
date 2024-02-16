@@ -26,7 +26,7 @@ def get_credit_score(consumer, age):
     else:
         score = 800
 
-    score = score - 2 * consumer['hard_enquiries']
+    score = score - round(2.25 * consumer['hard_enquiries'])
 
     return score
 
