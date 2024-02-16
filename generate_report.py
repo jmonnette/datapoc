@@ -38,6 +38,8 @@ def create_monthly_report(consumer_roster, date_string):
 
     for consumer in consumer_roster:
         age = calculate_age(consumer['dob'], last_day_str)
+        if age > 89:
+            consumer['is_deceased'] = True
         credit_report = {
             'report_date': last_day_str,
             'consumer': consumer,
