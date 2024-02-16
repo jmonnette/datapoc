@@ -10,7 +10,7 @@ repo = g.get_repo("jmonnette/datapoc")  # replace with user and repository name
 
 tags = repo.get_tags()
 tag1 = "v0.0.3"  # replace with your tag1
-tag2 = "v0.0.4"  # replace with your tag2
+tag2 = "v0.0.5"  # replace with your tag2
 
 sha1 = ""
 sha2 = ""

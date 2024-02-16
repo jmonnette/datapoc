@@ -6,4 +6,4 @@ def calculate_score(age):
     elif age > 30 and age <= 40:
         return 750
     else:
-        return 820
+        return 815
