@@ -21,8 +21,8 @@ def get_diff(file_1, file_2):
                 is_deceased_diff, data1['consumer']['is_deceased'], data2['consumer']['is_deceased'])
 
 def compare_reports(month1, month2):
-    directory1 = f'./{month1[:4]}/{month1[4:]}/'
-    directory2 = f'./{month2[:4]}/{month2[4:]}/'
+    directory1 = f'data/{month1[:4]}/{month1[4:]}/'
+    directory2 = f'data/{month2[:4]}/{month2[4:]}/'
     files1_dic = get_file_names(directory1)
     files2_dic = get_file_names(directory2)
     files_intersection = set(files1_dic.keys()) & set(files2_dic.keys())

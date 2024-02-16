@@ -54,7 +54,7 @@ def main():
     parser = argparse.ArgumentParser(description="Generate Monthly Credit Report")
     parser.add_argument("report_month", help="Report Month in the format yyyymm")
     args = parser.parse_args()
-    consumer_roster = read_roster("consumer_roster.json")
+    consumer_roster = read_roster("data/consumer_roster.json")
     create_monthly_report(consumer_roster, args.report_month)
 
 if __name__ == "__main__":
