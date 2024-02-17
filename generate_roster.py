@@ -1,7 +1,7 @@
 from faker import Faker
 import json
 import random
-import os
+import sys
 
 # Create a Faker instance
 fake = Faker()
