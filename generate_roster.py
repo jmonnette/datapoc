@@ -19,7 +19,7 @@ def create_person():
         'is_deceased': random.choice([True]*10 + [False]*90)  # boolean with 10% chance of being True
     }
 
-num = sys.argv[1]
+num = int(sys.argv[1])
 # Generate a consumer roster of X people
 people = [create_person() for _ in range(num)]
 
