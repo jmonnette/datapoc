@@ -1,6 +1,7 @@
 from faker import Faker
 import json
 import random
+import os
 
 # Create a Faker instance
 fake = Faker()
@@ -18,11 +19,12 @@ def create_person():
         'is_deceased': random.choice([True]*10 + [False]*90)  # boolean with 10% chance of being True
     }
 
-# Generate a consumer roster of 1000 people
-people = [create_person() for _ in range(1000)]
+num = sys.argv[1]
+# Generate a consumer roster of X people
+people = [create_person() for _ in range(num)]
 
 # Write the data to a JSON file
 with open('data/consumer_roster.json', 'w') as f:
     json.dump(people, f)
 
-print("Data generated and stored in 'consumer_roster.json'")
+print(f"Data generated and stored in 'consumer_roster.json' for {num} people")
