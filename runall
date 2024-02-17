@@ -4,7 +4,7 @@
 PYTHON_CMD=python3
 
 
-$PYTHON_CMD generate_roster.py
+$PYTHON_CMD generate_roster.py 10000
 
 export RELEASE_VERSION=v0.0.1
 git checkout tags/v0.0.1
