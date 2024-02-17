@@ -1,16 +1,21 @@
 from github import Github
 import os
+import sys
 from dotenv import load_dotenv
 
 load_dotenv()  # Load environment variables from .env file
 
+# Get parameters from command line
+repo_username = sys.argv[1]
+repo_name     = sys.argv[2]
+tag1          = sys.argv[3]
+tag2          = sys.argv[4]
+
 g = Github(os.getenv("GITHUB_TOKEN"))  # Get GitHub access token from environment variable
 
-repo = g.get_repo("jmonnette/datapoc")  # replace with user and repository name
+repo = g.get_repo(f"{repo_username}/{repo_name}")  # get repository using user and repository name
 
 tags = repo.get_tags()
-tag1 = "v0.0.3"  # replace with your tag1
-tag2 = "v0.0.6"  # replace with your tag2
 
 sha1 = ""
 sha2 = ""

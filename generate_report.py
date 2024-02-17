@@ -3,6 +3,9 @@ import json
 import argparse
 from dateutil.relativedelta import relativedelta
 from datetime import datetime
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def read_roster(file_path):
     with open(file_path, "r") as read_file:
