@@ -1,0 +1,17 @@
+faiss-cpu==1.7.4
+Faker==23.2.1
+langchain==0.1.7
+langchain-community==0.0.20
+langchain-core==0.1.23
+langchain-openai==0.0.6
+langchainhub==0.1.14
+numpy==1.26.4
+openai==1.12.0
+PyGithub==2.2.0
+python-dateutil==2.8.2
+python-dotenv==1.0.1
+regex==2023.12.25
+SQLAlchemy==2.0.27
+streamlit==1.31.1
+watchdog==4.0.0
+wikipedia==1.4.0
