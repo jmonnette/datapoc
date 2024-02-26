@@ -1,14 +1,11 @@
-from langchain.document_loaders.text import TextLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores.faiss import FAISS
-from langchain_openai import AzureChatOpenAI, AzureOpenAI, AzureOpenAIEmbeddings
+from langchain_openai import AzureChatOpenAI, AzureOpenAIEmbeddings
 from langchain.prompts import PromptTemplate 
 from langchain.chains import LLMChain
 from langchain import hub
-#from langchain.schema import HumanMessage
-from langchain.tools import BaseTool, StructuredTool, tool
+from langchain.tools import  tool
 from langchain.agents import AgentExecutor,create_react_agent
-#from langchain.agents import AgentType
 from langchain_core.prompts import PromptTemplate
 from langchain.tools import WikipediaQueryRun
 from langchain_community.utilities import WikipediaAPIWrapper
@@ -18,10 +15,8 @@ import fnmatch
 import json
 from dotenv import load_dotenv
 
-import diff_github as dg
-import retrieve_github as rg
-
-
+import github_helper.diff_github as dg
+import github_helper.retrieve_github as rg
 
 load_dotenv()
 
@@ -221,7 +216,7 @@ _repo_name = ""
 _tag_name = ""
 _db = None
 
-def run_agent(db, user_prompt, user_name, repo_name, tag_name="main"):
+def run_agent(db, memory, user_prompt, user_name, repo_name, tag_name="main"):
     global _user_name
     global _repo_name
     global _tag_name
@@ -231,7 +226,7 @@ def run_agent(db, user_prompt, user_name, repo_name, tag_name="main"):
     _tag_name = tag_name
     _db = db
 
-    prompt = hub.pull("hwchase17/react")
+    prompt = hub.pull("hwchase17/react-chat")
 
     llm = AzureChatOpenAI(azure_deployment="gpt-4", temperature=0)
     wikipedia = WikipediaQueryRun(api_wrapper=WikipediaAPIWrapper())
@@ -243,11 +238,13 @@ def run_agent(db, user_prompt, user_name, repo_name, tag_name="main"):
         llm=llm,
         prompt=prompt)
     #TODO: Add memory to allow conversations.  Needs to be cached.
-    #memory = ConversationBufferMemory()
-    agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True, handle_parsing_errors=True)
+    memory = ConversationBufferMemory(memory_key="chat_history") if memory is None else memory
+    agent_executor = AgentExecutor(agent=agent, memory=memory, tools=tools, verbose=True, handle_parsing_errors=True)
     
-    return agent_executor.invoke(
-        {"input": user_prompt})
+    return {
+        "memory": memory, 
+        "result": agent_executor.invoke({"input": user_prompt})
+    }
 
 def is_json_object(myjson):
     json_object = None
@@ -273,7 +270,4 @@ if __name__ == "__main__":
     # print(is_json_object("{'path':'readme.md'}"))
     # print(is_json_object('{"path":"readme.md"}'))
 
-    cache = {}
-    rg.build_repo_content_cache(cache, "jmonnette", "datapoc")
-    rg.set_repo_content_cache(cache)
-    create_db("jmonnette", "datapoc")
+    print(hub.pull("hwchase17/react-chat"))

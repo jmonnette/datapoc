@@ -15,6 +15,6 @@ git checkout tags/v0.0.4
 $PYTHON_CMD generate_report.py 202305
 
 git checkout main
-$PYTHON_CMD diff_github.py jmonnette datapoc v0.0.1 v0.0.4
+$PYTHON_CMD ../github_helper/diff_github.py jmonnette datapoc v0.0.1 v0.0.4
 
 $PYTHON_CMD compare_reports.py 202304 202305

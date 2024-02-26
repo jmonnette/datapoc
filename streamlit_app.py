@@ -39,6 +39,7 @@ if repo:
     tag2 = st.sidebar.selectbox("Tag 2", sorted_options, disabled=not compare_enabled)
     cache_enabled = st.sidebar.toggle("Enable Content Cache", True)
     search_enabled = st.sidebar.toggle("Enable Search Index", True)
+    memory_enabled = st.sidebar.toggle("Enable Agent Memory", True)
 
 # Create a button in sidebar
 if st.sidebar.button('Press me'):
@@ -77,7 +78,10 @@ if st.sidebar.button('Press me'):
 
             messages.markdown("**Status:** Running agent")
             search_db = search_dbs[key] if key in search_dbs and search_enabled else None
-            result.empty().write(lh.run_agent(search_db, prompt, repo_dict[repo]["owner"], repo_dict[repo]["name"], tag_name=options[tag1]['name']))
+            memory = st.session_state.agent_memory if "agent_memory" in st.session_state and memory_enabled else None
+            agent_output = lh.run_agent(search_db, memory, prompt, repo_dict[repo]["owner"], repo_dict[repo]["name"], tag_name=options[tag1]['name'])
+            st.session_state.agent_memory = agent_output["memory"]
+            result.empty().write(agent_output["result"])
             messages.markdown("**Status:** Complete")
 else:
     st.write('Waiting for you to type something and click the button...')
