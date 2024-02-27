@@ -5,6 +5,14 @@ The purpose of this project is to investigate and prove out the usefulness of LL
 2. SQL Query Generation (folder: sql_poc)
 3. GitHub Code Analysis (folder: .)
 
+The github_helper folder contains some utility functions for working with GitHub via the PyGithub library (which uses the GitHub API).  These utilities are used by both the GitHub Code Analysis PoC and the Report Compare PoC.
+
+## Current Limitations
+
+1. The PoCs that retrieve code will only work with GitHub currently because they are dependent upon the GitHub API.  To get around this, we could implement similar capabilities to work with other APIs (e.g., GitLab) or use the git client.
+2. The Langchain agent can run into issues with LLM context size limitations when large amounts of text need to be passed to the LLM
+3. Some scripts (e.g., retrieve_github.py) use global variables as a quick and dirty way to pass information between functions.  This should be refactored into a class.
+
 # GitHub Code Analysis Streamlit+Langchain App
 
 This application uses Streamlit for the UI and Langchain for the backend.  The Langchain code creates an LLM driven agent that, for a selected GitHub repo, can retrieve code, search the code for the most relevant info, fetch commit comments, and compare different versions.  The agent uses the LLM to reason about which actions to take based on a prompt, select an available tool to take the action, pass parameter values to the selected tool, and reason about next steps based on the information retrieved by the action.
@@ -13,7 +21,13 @@ The application has options to enable content caching, search indexing, and agen
 
 ## Setup
 
-Before you run the app, you need to set up your environment. Make sure to have your GitHub username set in an environment variable called `GITHUB_USER_NAME`. You can use an `.env` file for this.
+Before you run the app, you need to set up your environment. The following environment variables are required. You can use an `.env` file for this.
+
+GITHUB_USER_NAME
+GITHUB_TOKEN
+AZURE_OPENAI_ENDPOINT
+OPENAI_API_KEY
+OPENAI_API_VERSION
 
 ## How to run the application
 
