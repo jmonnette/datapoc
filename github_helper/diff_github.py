@@ -33,7 +33,7 @@ def diff_tags(tag1, tag2, repo_username, repo_name):
             sha2 = tag.commit.sha
 
     if sha1 and sha2:
-        return _diff_shas(sha1, sha2)
+        return _diff_shas(sha1, sha2, repo)
 
 
 if __name__ == "__main__":

@@ -1,10 +1,15 @@
 import streamlit as st
 import redirect
-import retrieve_github as rg
+import github_helper.retrieve_github as rg
 import langchain_helper as lh
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+USER_NAME = os.getenv("GITHUB_USER_NAME")
 
 st.set_page_config(layout="wide")
-USER_NAME = "jmonnette"
+
 
 def change_db():
     print("Changing DB")

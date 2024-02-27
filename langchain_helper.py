@@ -35,14 +35,17 @@ def create_db(user_name, repo_name, tag_name="main") -> FAISS:
     db = None
 
     for file in rg.get_file_list(user_name, repo_name, tag_name):
-        print(f"Loading file {file}")
-        text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
-        texts = text_splitter.split_text(get_file_content(file))
-        metadata = [{"source_file": file}] * len(texts)
-        if db is None:
-            db = FAISS.from_texts(texts, embeddings, metadata)
-        else:
-            db.add_texts(texts, metadata)
+        try:
+            print(f"Loading file {file}")
+            text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
+            texts = text_splitter.split_text(get_file_content(file))
+            metadata = [{"source_file": file}] * len(texts)
+            if db is None:
+                db = FAISS.from_texts(texts, embeddings, metadata)
+            else:
+                db.add_texts(texts, metadata)
+        except Exception as e:
+            print(f"Skipped {file} due to error: {e}")
     print("FAISS database complete")
     return db
 
@@ -190,7 +193,11 @@ def get_file_content(path):
     else:
         file_path = path.replace("'","")
 
-    return rg.get_file_content(_user_name, _repo_name, file_path, _tag_name)
+    try:
+        return rg.get_file_content(_user_name, _repo_name, file_path, _tag_name)
+    except Exception as e:
+        print(f"Error: {e}")
+        return "File content could not be loaded"
     
 """     with open(path.replace("'",""), 'r') as file:
         return file.read() """
