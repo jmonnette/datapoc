@@ -1,9 +1,9 @@
 # Data PoC
 The purpose of this project is to investigate and prove out the usefulness of LLMs in analyzing data differences and identifying the causes of these differences in underlying code.  There are three sub-PoCs in this project:
 
-1. Report Compare (folder: report_compare)
-2. SQL Query Generation (folder: sql_poc)
-3. GitHub Code Analysis (folder: .)
+1. [Report Compare](/report_compare/readme.md) (folder: report_compare)
+3. [SQL Query Generation](/sql_poc/readme.md) (folder: sql_poc)
+4. GitHub Code Analysis (folder: .)
   - [Langchain Agent](#Langchain-Agent-langchain_helperpy)
   - [Streamlit UI](#GitHub-Code-Analysis-StreamlitLangchain-App)
   - [Github Helper](/github_helper/readme.md)
