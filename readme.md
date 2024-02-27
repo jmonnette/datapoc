@@ -1,8 +1,15 @@
-# Data PoC Streamlit App
+# Data PoC
+The purpose of this project is to investigate and prove out the usefulness of LLMs in analyzing data differences and identifying the causes of these differences in underlying code.  There are three sub-PoCs in this project:
 
-This is a Streamlit application that retrieves GitHub repositories, fetches various details related to them, and also has options to compare different versions as well.
+1. Report Compare (folder: report_compare)
+2. SQL Query Generation (folder: sql_poc)
+3. GitHub Code Analysis (folder: .)
 
-The application has options to enable content cache, search index, and agent memory.
+# GitHub Code Analysis Streamlit+Langchain App
+
+This application uses Streamlit for the UI and Langchain for the backend.  The Langchain code creates an LLM driven agent that, for a selected GitHub repo, can retrieve code, search the code for the most relevant info, fetch commit comments, and compare different versions.  The agent uses the LLM to reason about which actions to take based on a prompt, select an available tool to take the action, pass parameter values to the selected tool, and reason about next steps based on the information retrieved by the action.
+
+The application has options to enable content caching, search indexing, and agent memory.
 
 ## Setup
 
@@ -73,11 +80,6 @@ This script provides functionalities to interact with the GitHub API to retrieve
 - python-dotenv
 - fnmatch
 - json
-
-## How to Run
-1. Clone the repository.
-2. Install all dependencies by running `pip install -r requirements.txt` assuming all dependencies are listed in the `requirements.txt` file.
-3. Run `python script.py` within your terminal.
 
 ## How it works
 
