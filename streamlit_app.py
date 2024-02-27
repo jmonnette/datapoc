@@ -6,26 +6,22 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
-USER_NAME = os.getenv("GITHUB_USER_NAME")
+user_name = os.getenv("GITHUB_USER_NAME")
 
 st.set_page_config(layout="wide")
 
-
-def change_db():
-    print("Changing DB")
-
-repos = rg.get_repos(USER_NAME)
+repos = rg.get_repos(user_name)
 repo_dict = {}
 for repo in repos:
      repo_dict[repo["full_name"]] = repo
 
-repo = st.sidebar.selectbox("Repo", repo_dict.keys(), on_change=change_db)
+repo = st.sidebar.selectbox("Repo", repo_dict.keys())
 if repo:
     repo_name = repo_dict[repo]["name"]
     options = {}
     
-    tags = rg.get_tags(USER_NAME, repo_name)
-    branches = rg.get_branches(USER_NAME, repo_name)
+    tags = rg.get_tags(user_name, repo_name)
+    branches = rg.get_branches(user_name, repo_name)
 
     for tag in tags:
         options[f"{tag['name']} (Tag)"] = tag
