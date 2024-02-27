@@ -4,8 +4,8 @@ The purpose of this project is to investigate and prove out the usefulness of LL
 1. Report Compare (folder: report_compare)
 2. SQL Query Generation (folder: sql_poc)
 3. GitHub Code Analysis (folder: .)
-  - [Langchain Agent](#Langchain-Agent-(langchain_helper.py))
-  - [Streamlit UI](#GitHub-Code-Analysis-Streamlit+Langchain-App)
+  - [Langchain Agent](#Langchain-Agent-langchain_helperpy)
+  - [Streamlit UI](#GitHub-Code-Analysis-StreamlitLangchain-App)
   - [Github Helper](/github_helper/readme.md)
 
 The github_helper folder contains some utility functions for working with GitHub via the PyGithub library (which uses the GitHub API).  These utilities are used by both the GitHub Code Analysis PoC and the Report Compare PoC.
