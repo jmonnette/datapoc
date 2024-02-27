@@ -23,11 +23,13 @@ The application has options to enable content caching, search indexing, and agen
 
 Before you run the app, you need to set up your environment. The following environment variables are required. You can use an `.env` file for this.
 
+```bash
 GITHUB_USER_NAME
 GITHUB_TOKEN
 AZURE_OPENAI_ENDPOINT
 OPENAI_API_KEY
 OPENAI_API_VERSION
+```
 
 ## How to run the application
 
