@@ -1,9 +1,7 @@
 import os
-import base64
-import sys
 from github import Github
 from dotenv import load_dotenv
-import itertools
+import fnmatch
 
 # Read environment variable using dotenv
 load_dotenv()
@@ -34,14 +32,14 @@ def get_branches_and_tags(user_name, repo_name):
 def find_branch_or_tag(user_name, repo_name, search_name):
     return next(ref for ref in get_branches_and_tags(user_name, repo_name) if ref["name"] == search_name)
 
-def get_file_tree(user_name, repo_name, ref="main"):
+def get_file_tree(user_name, repo_name, ref="main", filter="*"):
     repo = github_instance.get_user(user_name).get_repo(repo_name)   
     commit = find_branch_or_tag(user_name, repo_name, ref)["commit"]
 
     tree = repo.get_git_tree(sha=commit.sha, recursive=True).tree
     file_tree = {}
 
-    for element in tree:
+    for element in (element for element in tree if fnmatch.fnmatch(element.path, filter)):
         path_parts = element.path.split('/')
         current_level = file_tree
 

@@ -121,11 +121,7 @@ def get_file_tree(filter='{"filter":"*"}'):
     if isjson and  "filter" in filter_dict:
         file_filter = filter_dict["filter"]
         
-    file_list = rg.get_file_tree(_user_name, _repo_name, _tag_name)
-    if file_filter == "*":
-        return file_list
-    
-    return [path for path in file_list if fnmatch.fnmatch(path, file_filter)]
+    return rg.get_file_tree(_user_name, _repo_name, _tag_name, file_filter)
 
 """     files = glob.glob()
     print(f"Getting files: {files}")
