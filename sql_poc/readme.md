@@ -1,6 +1,18 @@
-# My Python Script Documentation
+# Langchain SQL PoC
 
 This is a Python script that interacts with a SQLite database, processes user queries and retrieves corresponding results. It uses the OpenAI GPT model for generating SQL queries based on natural language input, specifically GPT-4.
+
+The script does the following
+
+1. Retrieves a list of tables, descriptions, and referenced tables from the database
+2. Passes this list to an LLM to decide which tables should be included in the query
+3. Retrieves the DDL for the selected tables
+4. Generates an SQL query based on the DDL
+
+## Current Limitations
+
+1. Only works with SQLite
+2. Requires a TableMetadata table to store additional metadata about tables (i.e., descriptions and referenced tables
 
 ## Requirements
 

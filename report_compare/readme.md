@@ -1,6 +1,10 @@
-# Report Comparer Documentation
+# Report Comparer PoC
 
 This shell script (written in Zsh), enables you to generate a roster, check out different versions of code, generate reports, and compare the generated reports.
+
+## Current Limitations
+
+1. Roster size and versions to compare are hard coded into the script.  They should be passed as parameters on the command line.
 
 ## Requirements
 1. zsh
